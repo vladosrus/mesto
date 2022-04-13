@@ -8,6 +8,9 @@
     background: none;
     display: flex;
 }
+.profile__add-button:hover {
+    opacity: 0.6;
+}
 
 @media (max-width: 747px) {
     .profile__add-button {

@@ -12,3 +12,9 @@
         margin: 0px;
     }
 }
+@media (max-width: 747px) {
+    .header {
+        padding-top: 28px;
+        min-height: 55px;
+    }
+}

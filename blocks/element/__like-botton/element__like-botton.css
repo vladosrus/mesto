@@ -3,6 +3,10 @@
     max-height: 19px;
     margin: 0px 0px 6px;
 }
+.element__like-botton:hover {
+    opacity: 0.5;
+}
 .element__like-botton:active {
+    opacity: 1;
     background-image: url(../../../images/like_active.svg);
 }
