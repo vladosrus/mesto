@@ -1,0 +1,18 @@
+.element__caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 0px 15px 24px 21px;
+    max-width: 246px;
+}
+
+@media (max-width: 918px) {
+    .element__caption {
+        max-width: none;
+    }
+}
+@media (max-width: 379px) {
+    .element__caption {
+        max-width: 246px;
+    }
+}

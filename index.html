@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,9 +11,86 @@
 </head>
 <body>
     <div class="page">
-        <header class="header"></header>
-        <main></main>
-        <footer class="footer"></footer>
+        <header class="header">
+            <img src="./images/header__logo.svg" alt="Место Россия" class="header__logo">
+        </header>
+        <main>
+            <section class="profile">
+                <img src="./images/jacques-yves-cousteau.jpg" alt="" class="profile__avatar">
+                <div class="profile__info">
+                    <h1 class="profile__title">Жак-Ив Кусто</h1>
+                    <p class="profile__subtitle">Исследователь океана</p>
+                    <button class="profile__edit-button">
+                        <img class="profile__edit-button-picture" src="./images/edit-button.svg" alt="Ручка">
+                    </button>
+                </div>
+                 <button class="profile__add-button">
+                     <img class="profile__add-button-picture" src="./images/add-button.svg" alt="Плюс">
+                 </button>                
+            </section>
+            
+            <section class="elements">
+                <ul class="elements__list">
+                    <li class="elements__list-item">
+                        <figure class="element">
+                            <img class="element__image" src="./images/karachayevsk.jpg" alt="Сентинский храм">
+                            <figcaption class="element__caption">
+                                <h2 class="element__title">Карачаевск</h2>
+                                <img class="element__like-botton" src="./images/like.svg" alt="Знак лайк">
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="elements__list-item">
+                        <figure class="element">
+                            <img class="element__image" src="./images/elbrus.jpg" alt="Закат в горах">
+                            <figcaption class="element__caption">
+                                <h2 class="element__title">Гора Эльбрус</h2>
+                                <img class="element__like-botton" src="./images/like.svg" alt="Знак лайк">
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="elements__list-item">
+                        <figure class="element">
+                            <img class="element__image" src="./images/dombay.jpg" alt="Гора Белалакая">
+                            <figcaption class="element__caption">
+                                <h2 class="element__title">Домбай</h2>
+                                <img class="element__like-botton" src="./images/like.svg" alt="Знак лайк">
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="elements__list-item">
+                        <figure class="element">
+                            <img class="element__image" src="./images/elbrus.jpg" alt="Закат в горах">
+                            <figcaption class="element__caption">
+                                <h2 class="element__title">Гора Эльбрус</h2>
+                                <img class="element__like-botton" src="./images/like.svg" alt="Знак лайк">
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="elements__list-item">
+                        <figure class="element">
+                            <img class="element__image" src="./images/dombay.jpg" alt="Гора Белалакая">
+                            <figcaption class="element__caption">
+                                <h2 class="element__title">Домбай</h2>
+                                <img class="element__like-botton" src="./images/like.svg" alt="Знак лайк">
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="elements__list-item">
+                        <figure class="element">
+                            <img class="element__image" src="./images/karachayevsk.jpg" alt="Сентинский храм">
+                            <figcaption class="element__caption">
+                                <h2 class="element__title">Карачаево-Черкессия</h2>
+                                <img class="element__like-botton" src="./images/like.svg" alt="Знак лайк">
+                            </figcaption>
+                        </figure>
+                    </li>
+                </ul>
+            </section>
+        </main>
+        <footer class="footer">
+            <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
+        </footer>
     </div>
 </body>
 </html>

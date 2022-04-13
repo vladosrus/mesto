@@ -1,0 +1,8 @@
+.element__like-botton {
+    max-width: 22px;
+    max-height: 19px;
+    margin: 0px 0px 6px;
+}
+.element__like-botton:active {
+    background-image: url(../../../images/like_active.svg);
+}
