@@ -6,7 +6,8 @@
 
 @media (max-width: 918px) {
     .elements {
-        margin: 0px 19px;
+        margin-left: 19px;
+        margin-right: 19px;
     }
 }
 @media (max-width: 747px) {
