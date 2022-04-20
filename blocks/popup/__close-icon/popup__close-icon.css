@@ -12,6 +12,7 @@
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
+    cursor: pointer;
 }
 .popup__close-icon:hover {
     opacity: 0.6;

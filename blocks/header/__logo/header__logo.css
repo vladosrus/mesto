@@ -2,7 +2,9 @@
     max-width: 142px;
     max-height: 33px;
 }
-
+.header__logo:hover {
+    opacity: 0.6;
+}
 
 @media (max-width: 934px) {
     .header__logo {

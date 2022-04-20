@@ -1,7 +1,14 @@
 .element__like-botton {
-    max-width: 22px;
-    max-height: 19px;
+    min-width: 22px;
+    min-height: 19px;
     margin: 0px 0px 6px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0px;
+    background-image: url(../../../images/like.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .element__like-botton:hover {
     opacity: 0.5;

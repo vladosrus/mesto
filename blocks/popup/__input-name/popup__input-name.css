@@ -1,12 +1,13 @@
 .popup__input-name {
     min-width: 358px;
-    margin: 54px auto 0px;
+    margin: 0px auto 0px;
     padding: 0px 0px 13px;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
+    outline: none;
 }
 
 @media (max-width: 468px) {
