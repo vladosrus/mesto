@@ -2,6 +2,7 @@
 
 const popupProfile = document.querySelector(".popup_named_profile");
 const popupCard = document.querySelector(".popup_named_card");
+const popupZoom = document.querySelector(".popup_named_zoom");
 const popupProfileName = popupProfile.querySelector(".popup__input_named_name");
 const popupProfileJob = popupProfile.querySelector(".popup__input_named_job");
 const popupCardImgname = popupCard.querySelector(".popup__input_named_imgname");
@@ -10,9 +11,11 @@ const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
 const name = document.querySelector(".profile__title");
 const job = document.querySelector(".profile__subtitle");
-
+const popupZoomImg = document.querySelector('.popup__image');
+const popupZoomText = document.querySelector('.popup__caption');
 const profileCloseIcon = popupProfile.querySelector(".popup__close-icon");
 const cardCloseIcon = popupCard.querySelector(".popup__close-icon");
+const popupZoomCloseIcon = popupZoom.querySelector('.popup__close-icon');
 const popupProfileForm = popupProfile.querySelector(".popup__form");
 const popupCardForm = popupCard.querySelector(".popup__form");
 
@@ -86,9 +89,21 @@ const generateNewCard = (a, b) => {
     .addEventListener("click", (evt) => {
       evt.target.closest(".element").remove();
     });
+
+  //Увеличение фотографии
+  newCardImage.addEventListener("click", (evt) => {
+    popupOpened(popupZoom);
+    popupZoomImg.src = newCardImage.src;
+    popupZoomText.textContent = newCardTitle.textContent;
+  });
+
+  //Закрытие увеличенных фотографий
+  popupZoomCloseIcon.addEventListener("click", () => {
+    popupClose(popupZoom);
+  });
+
   return newCard;
 };
-
 //Автодобавление начальных карточек
 
 const cardTemplate = document
@@ -102,20 +117,33 @@ const generateInitialCard = (item) => {
   newCardTitle.textContent = item.name;
   const newCardImage = newCard.querySelector(".element__image");
   newCardImage.src = item.link;
-  
+
   //Функция лайков
   newCard
     .querySelector(".element__like-botton")
     .addEventListener("click", (evt) => {
       evt.target.classList.toggle("element__like-botton_active");
     });
-  
+
   //Функция удаления карточек
   newCard
     .querySelector(".element__basket-botton")
     .addEventListener("click", (evt) => {
       evt.target.closest(".element").remove();
     });
+
+  //Увеличение фотографии
+  newCardImage.addEventListener("click", (evt) => {
+    popupOpened(popupZoom);
+    popupZoomImg.src = newCardImage.src;
+    popupZoomText.textContent = newCardTitle.textContent;
+  });
+
+  //Закрытие увеличенных фотографий
+  popupZoomCloseIcon.addEventListener("click", () => {
+    popupClose(popupZoom);
+  });
+
   return newCard;
 };
 
