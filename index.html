@@ -29,79 +29,45 @@
             
             <section class="elements">
                 <ul class="elements__list">
-                    <li class="elements__list-item">
-                        <template id="card">
-                            <article class="element">
-                                <img class="element__image" src="./images/karachayevsk.jpg" alt="Сентинский храм">
-                                <div class="element__caption">
-                                    <h2 class="element__title">Карачаевск</h2>
-                                    <button class="element__like-botton" type="button"></button>
-                                </div>
-                            </article>
-                        </template>
-                    </li>
-                    <li class="elements__list-item">
-                        <!-- <article class="element">
-                            <img class="element__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Закат в горах">
-                            <div class="element__caption">
-                                <h2 class="element__title">Гора Эльбрус</h2>
-                                <button class="element__like-botton" type="button"></button>
-                            </div>
-                        </article> -->
-                    </li>
-                    <li class="elements__list-item">
-                        <!--<article class="element">
-                            <img class="element__image" src="./images/dombay.jpg" alt="Гора Белалакая">
-                            <div class="element__caption">
-                                <h2 class="element__title">Домбай</h2>
-                                <button class="element__like-botton" type="button"></button>
-                            </div>
-                        </article>-->
-                    </li>
-                    <li class="elements__list-item">
-                        <!--<article class="element">
-                            <img class="element__image" src="./images/elbrus.jpg" alt="Закат в горах">
-                            <div class="element__caption">
-                                <h2 class="element__title">Гора Эльбрус</h2>
-                                <button class="element__like-botton" type="button"></button>
-                            </div>
-                        </article>-->
-                    </li>
-                    <li class="elements__list-item">
-                        <!--<article class="element">
-                            <img class="element__image" src="./images/dombay.jpg" alt="Гора Белалакая">
-                            <div class="element__caption">
-                                <h2 class="element__title">Домбай</h2>
-                                <button class="element__like-botton" type="button"></button>
-                            </div>
-                        </article>-->
-                    </li>
-                    <li class="elements__list-item">
-                        <!--<article class="element">
+                    <template id="card">
+                        <article class="element">
                             <img class="element__image" src="./images/karachayevsk.jpg" alt="Сентинский храм">
                             <div class="element__caption">
-                                <h2 class="element__title">Карачаево-Черкессия</h2>
-                                <button class="element__like-botton" type="button"></button>
+                                <h2 class="element__title">Карачаевск</h2>
+                                <button class="element__like-botton" type="button" id="like"></button>
                             </div>
-                        </article>-->
-                    </li>
+                        </article>
+                    </template>
                 </ul>
             </section>
         </main>
         <footer class="footer">
             <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
         </footer>
-        <div class="popup">
-            <div class="popup__container">
-                <h2 class="popup__title">Редактировать профиль</h2>
-                <button class="popup__close-icon" type="button"></button>
-                <form class="popup__form" name="profile-form">
-                    <input class="popup__input popup__input_named_name" type="text" name="name">
-                    <input class="popup__input popup__input_named_job" type="text" name="job">
-                    <button class="popup__submit-button" type="submit">Сохранить</button>
-                </form>
+        <!-- Попап редактирования профиля -->
+            <div class="popup popup_named_profile">
+                <div class="popup__container">
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                    <button class="popup__close-icon" type="button"></button>
+                    <form class="popup__form">
+                        <input class="popup__input popup__input_named_name" type="text">
+                        <input class="popup__input popup__input_named_job" type="text">
+                        <button class="popup__submit-button" type="submit">Сохранить</button>
+                    </form>
+                </div>
             </div>
-        </div>
+        <!-- Попап добавления карточек -->
+            <div class="popup popup_named_card">
+                <div class="popup__container">
+                    <h2 class="popup__title">Новое Место</h2>
+                    <button class="popup__close-icon" type="button"></button>
+                    <form class="popup__form">
+                        <input class="popup__input popup__input_named_imgname" type="text" placeholder="Название">
+                        <input class="popup__input popup__input_named_link" type="text" placeholder="Ссылка на картинку">
+                        <button class="popup__submit-button" type="submit">Создать</button>
+                    </form>
+                </div>
+            </div>
     </div>
     <script src="./scripts/cards.js"></script>
     <script src="./scripts/index.js"></script>

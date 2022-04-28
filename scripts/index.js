@@ -1,61 +1,108 @@
 // Дом элементы
 
-const popup = document.querySelector(".popup");
-const popupName = document.querySelector(".popup__input_named_name");
-const popupJob = document.querySelector(".popup__input_named_job");
+const popupProfile = document.querySelector(".popup_named_profile");
+const popupCard = document.querySelector(".popup_named_card");
+const popupProfileName = popupProfile.querySelector(".popup__input_named_name");
+const popupProfileJob = popupProfile.querySelector(".popup__input_named_job");
+const popupCardImgname = popupCard.querySelector(".popup__input_named_imgname");
+const popupCardLink = popupCard.querySelector(".popup__input_named_link");
 const editButton = document.querySelector(".profile__edit-button");
+const addButton = document.querySelector(".profile__add-button");
 const name = document.querySelector(".profile__title");
 const job = document.querySelector(".profile__subtitle");
-const closeIcon = document.querySelector(".popup__close-icon");
-const formElement = document.querySelector(".popup__form");
 
-//Открытие попапа
+const profileCloseIcon = popupProfile.querySelector(".popup__close-icon");
+const cardCloseIcon = popupCard.querySelector(".popup__close-icon");
+const popupProfileForm = popupProfile.querySelector(".popup__form");
+const popupCardForm = popupCard.querySelector(".popup__form");
 
-function popupOpened() {
+//Открытие попапа редактирования профиля
+
+function popupOpened(popup) {
   popup.classList.add("popup_opened");
-  popupName.value = name.textContent;
-  popupJob.value = job.textContent;
 }
-editButton.addEventListener("click", popupOpened);
 
-//Закрытие попапа
+editButton.addEventListener("click", () => {
+  popupOpened(popupProfile);
+  popupProfileName.value = name.textContent;
+  popupProfileJob.value = job.textContent;
+});
 
-function popupClose() {
+//Закрытие попапа редактирования профиля
+
+function popupClose(popup) {
   popup.classList.remove("popup_opened");
 }
-closeIcon.addEventListener("click", popupClose);
+
+profileCloseIcon.addEventListener("click", () => {
+  popupClose(popupProfile);
+});
 
 //Измение текста в профиле
 
-function formSubmitHandler(evt) {
-  evt.preventDefault();
-  name.textContent = popupName.value;
-  job.textContent = popupJob.value;
-  popupClose();
-}
-formElement.addEventListener("submit", formSubmitHandler);
+popupProfileForm.addEventListener("submit", () => {
+  popupClose(popupProfile);
+  name.textContent = popupProfileName.value;
+  job.textContent = popupProfileJob.value;
+});
 
-//Отрисовка начальных карточек
+//Открытие попопа добавления карточек
+
+addButton.addEventListener("click", () => {
+  popupOpened(popupCard);
+});
+
+//Закрытие попапа добавления карточек
+cardCloseIcon.addEventListener("click", () => {
+  popupClose(popupCard);
+});
+
+//Добавление новых карточек
+
+popupCardForm.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  cardContainer.prepend(generateNewCard(popupCardImgname, popupCardLink));
+  popupClose(popupCard);
+  evt.target.reset();
+});
+
+const generateNewCard = (a, b) => {
+  const newCard = cardTemplate.cloneNode(true);
+  const newCardTitle = newCard.querySelector(".element__title");
+  newCardTitle.textContent = a.value;
+  const newCardImage = newCard.querySelector(".element__image");
+  newCardImage.src = b.value;
+  newCard
+    .querySelector(".element__like-botton")
+    .addEventListener("click", (evt) => {
+      evt.target.classList.toggle("element__like-botton_active");
+    });
+  return newCard;
+};
+
+//Автодобавление начальных карточек
 
 const cardTemplate = document
   .querySelector("#card")
   .content.querySelector(".element");
 const cardContainer = document.querySelector(".elements__list");
 
-const generateCard = (item) => {
+const generateInitialCard = (item) => {
   const newCard = cardTemplate.cloneNode(true);
   const newCardTitle = newCard.querySelector(".element__title");
   newCardTitle.textContent = item.name;
   const newCardImage = newCard.querySelector(".element__image");
   newCardImage.src = item.link;
-
+  newCard
+    .querySelector(".element__like-botton")
+    .addEventListener("click", (evt) => {
+      evt.target.classList.toggle("element__like-botton_active");
+    });
   return newCard;
 };
 
-const renderCards = (item) => {
-  cardContainer.append(generateCard(item));
-};
-
 initialCards.forEach((item) => {
-  renderCards(item);
+  cardContainer.append(generateInitialCard(item));
 });
+
+//Удаление карточки
