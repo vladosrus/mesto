@@ -75,6 +75,7 @@ const generateNewCard = (a, b) => {
   newCardTitle.textContent = a.value;
   const newCardImage = newCard.querySelector(".element__image");
   newCardImage.src = b.value;
+  newCardImage.alt = a.value;
 
   //Функция лайков
   newCard
@@ -117,6 +118,7 @@ const generateInitialCard = (item) => {
   newCardTitle.textContent = item.name;
   const newCardImage = newCard.querySelector(".element__image");
   newCardImage.src = item.link;
+  newCardImage.alt = item.name;
 
   //Функция лайков
   newCard
