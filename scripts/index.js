@@ -43,7 +43,8 @@ profileCloseIcon.addEventListener("click", () => {
 
 //Измение текста в профиле
 
-popupProfileForm.addEventListener("submit", () => {
+popupProfileForm.addEventListener("submit", (evt) => {
+  evt.preventDefault();
   popupClose(popupProfile);
   name.textContent = popupProfileName.value;
   job.textContent = popupProfileJob.value;
