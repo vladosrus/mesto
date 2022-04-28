@@ -72,10 +72,19 @@ const generateNewCard = (a, b) => {
   newCardTitle.textContent = a.value;
   const newCardImage = newCard.querySelector(".element__image");
   newCardImage.src = b.value;
+
+  //Функция лайков
   newCard
     .querySelector(".element__like-botton")
     .addEventListener("click", (evt) => {
       evt.target.classList.toggle("element__like-botton_active");
+    });
+
+  //Функция удаления карточек
+  newCard
+    .querySelector(".element__basket-botton")
+    .addEventListener("click", (evt) => {
+      evt.target.closest(".element").remove();
     });
   return newCard;
 };
@@ -93,10 +102,19 @@ const generateInitialCard = (item) => {
   newCardTitle.textContent = item.name;
   const newCardImage = newCard.querySelector(".element__image");
   newCardImage.src = item.link;
+  
+  //Функция лайков
   newCard
     .querySelector(".element__like-botton")
     .addEventListener("click", (evt) => {
       evt.target.classList.toggle("element__like-botton_active");
+    });
+  
+  //Функция удаления карточек
+  newCard
+    .querySelector(".element__basket-botton")
+    .addEventListener("click", (evt) => {
+      evt.target.closest(".element").remove();
     });
   return newCard;
 };
@@ -104,5 +122,3 @@ const generateInitialCard = (item) => {
 initialCards.forEach((item) => {
   cardContainer.append(generateInitialCard(item));
 });
-
-//Удаление карточки
