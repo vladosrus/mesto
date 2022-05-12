@@ -24,6 +24,11 @@ const job = document.querySelector(".profile__subtitle");
 //Открытие попапа редактирования профиля
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(popup);
+    } 
+  })
 }
 
 editButton.addEventListener("click", () => {
@@ -35,11 +40,12 @@ editButton.addEventListener("click", () => {
 //Закрытие попапа редактирования профиля
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(popup);
+    } 
+  })
 }
-
-profileCloseIcon.addEventListener("click", () => {
-  closePopup(popupProfile);
-});
 
 //Измение текста в профиле
 popupProfileForm.addEventListener("submit", (evt) => {
