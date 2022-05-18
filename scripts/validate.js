@@ -38,10 +38,14 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
+const disabledButton = (button) => {
+  button.classList.add("popup__submit-button_disabled");
+  button.disabled = 'disabled';
+}
+
 const toggleButtonState = (inputList, buttonElement, obj) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(obj.inactiveButtonClass);
-    buttonElement.disabled = 'disabled';
+    disabledButton(buttonElement, obj);
   } else {
     buttonElement.classList.remove(obj.inactiveButtonClass);
     buttonElement.disabled = '';
@@ -74,12 +78,13 @@ const enableValidation = (obj) => {
   });
 };
 
-
-enableValidation({
+const classes = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__submit-button",
   inactiveButtonClass: "popup__submit-button_disabled",
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input-error_visible",
-});
+}
+
+enableValidation(classes);
