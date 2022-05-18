@@ -1,6 +1,7 @@
+
 // Функция показывающая ошибку после валидации
 const showInputError = (formElement, inputElement, errorMessage, obj) => {
-  const errorElement = formElement.querySelectorAll(".popup__error");
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(obj.inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(obj.errorClass);
@@ -8,14 +9,16 @@ const showInputError = (formElement, inputElement, errorMessage, obj) => {
 
 // Функция убирающая отображение ошибки
 const hideInputError = (formElement, inputElement, obj) => {
-  const errorElement = formElement.querySelectorAll(".popup__error");
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  errorElement.textContent = "";
   inputElement.classList.remove(obj.inputErrorClass);
   errorElement.classList.remove(obj.errorClass);
-  errorElement.textContent = "";
+  
 };
 
+
 // Функция проверки полей на валидность
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, obj) => {
   if (!inputElement.validity.valid) {
     showInputError(
       formElement,
@@ -28,12 +31,34 @@ const checkInputValidity = (formElement, inputElement) => {
   }
 };
 
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+const toggleButtonState = (inputList, buttonElement, obj) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add(obj.inactiveButtonClass);
+    buttonElement.disabled = 'disabled';
+  } else {
+    buttonElement.classList.remove(obj.inactiveButtonClass);
+    buttonElement.disabled = '';
+  }
+};
+
 // Функция добавления слушателей, вызывающих функцию проверки поля для ввода
 const setEventListeners = (formElement, obj) => {
-  const inputList = Array.from(document.querySelectorAll(obj.inputSelector));
+  const inputList = Array.from(formElement.querySelectorAll(obj.inputSelector));
+  const buttonElement = formElement.querySelector(obj.submitButtonSelector);
+
+  toggleButtonState(inputList, buttonElement, obj);
+
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", function () {
-      checkInputValidity(formElement, inputElement);
+    inputElement.addEventListener('input', function () {
+      checkInputValidity(formElement, inputElement, obj);
+      toggleButtonState(inputList, buttonElement, obj);
     });
   });
 };
@@ -42,18 +67,19 @@ const setEventListeners = (formElement, obj) => {
 const enableValidation = (obj) => {
   const formList = Array.from(document.querySelectorAll(obj.formSelector));
   formList.forEach((formElement) => {
-    formElement.addEventListener("submit", function (evt) {
+    formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      enableValidation({
-        formSelector: ".popup__form",
-        inputSelector: ".popup__input",
-        submitButtonSelector: ".popup__button",
-        inactiveButtonClass: "popup__button_disabled", //???
-        inputErrorClass: ".popup__input_type_error",
-        errorClass: ".popup__error_visible",
-      });
     });
-
     setEventListeners(formElement, obj);
   });
 };
+
+
+enableValidation({
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit-button",
+  inactiveButtonClass: "popup__submit-button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error_visible",
+});

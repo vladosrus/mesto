@@ -1,4 +1,4 @@
-// Дом элементы
+// ПЕРЕМЕННЫЕ
 const popupProfile = document.querySelector(".popup_named_profile");
 const popupProfileName = popupProfile.querySelector(".popup__input_named_name");
 const popupProfileJob = popupProfile.querySelector(".popup__input_named_job");
@@ -21,34 +21,22 @@ const addButton = document.querySelector(".profile__add-button");
 const name = document.querySelector(".profile__title");
 const job = document.querySelector(".profile__subtitle");
 
-//Открытие попапа редактирования профиля
-function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", handlePressEscape);
-}
+const cardTemplate = document
+  .querySelector("#card")
+  .content.querySelector(".element");
+const cardContainer = document.querySelector(".elements__list");
 
+//ОБРАБОТЧИКИ
+
+//Слушатель кнопки открытия попапа редактирования профиля
 editButton.addEventListener("click", () => {
   openPopup(popupProfile);
   popupProfileName.value = name.textContent;
   popupProfileJob.value = job.textContent;
 });
 
-function handlePressEscape(evt) {
-  if (evt.key === "Escape") {
-    const findPopup = document.querySelector(".popup_opened");
-    closePopup(findPopup);
-  }
-}
-
-//Закрытие попапа редактирования профиля
-function closePopup(popup) {
-  document.removeEventListener("keydown", handlePressEscape);
-  popup.classList.remove("popup_opened");
-}
-
-profileCloseIcon.addEventListener("click", () => {
-  closePopup(popupProfile);
-});
+//Слушатель кнопки-крестика для закрытия попапа редактирования профиля
+profileCloseIcon.addEventListener("click", () => closePopup(popupProfile));
 
 //Измение текста в профиле
 popupProfileForm.addEventListener("submit", (evt) => {
@@ -58,15 +46,11 @@ popupProfileForm.addEventListener("submit", (evt) => {
   job.textContent = popupProfileJob.value;
 });
 
-//Открытие попопа добавления карточек
-addButton.addEventListener("click", () => {
-  openPopup(popupCard);
-});
+//Слушатель кнопки открытия попапа добавления карточек
+addButton.addEventListener("click", () => openPopup(popupCard));
 
-//Закрытие попапа добавления карточек
-cardCloseIcon.addEventListener("click", () => {
-  closePopup(popupCard);
-});
+//Слушатель кнопки-крестика для закрытия попапа добавления карточек
+cardCloseIcon.addEventListener("click", () => closePopup(popupCard));
 
 //Добавление карточек
 popupCardForm.addEventListener("submit", (evt) => {
@@ -78,6 +62,29 @@ popupCardForm.addEventListener("submit", (evt) => {
   evt.target.reset();
 });
 
+//Слушатель кнопки-крестика для закрытия увеличенных фотографий
+popupZoomCloseIcon.addEventListener("click", () => closePopup(popupZoom));
+
+//ФУНКЦИИ
+
+//Открытие попапа редактирования профиля
+function openPopup(popup) {
+  popup.classList.add("popup_opened");
+  document.addEventListener("keydown", handlePressEscape);
+}
+//Закрытие на кнопку ESC
+function handlePressEscape(evt) {
+  if (evt.key === "Escape") {
+    const findPopup = document.querySelector(".popup_opened");
+    closePopup(findPopup);
+  }
+}
+//Закрытие попапа редактирования профиля
+function closePopup(popup) {
+  document.removeEventListener("keydown", handlePressEscape);
+  popup.classList.remove("popup_opened");
+}
+//Функция генерации новых карточек
 const generateNewCard = ({ name, link }) => {
   const newCard = cardTemplate.cloneNode(true);
   const newCardTitle = newCard.querySelector(".element__title");
@@ -110,22 +117,10 @@ const generateNewCard = ({ name, link }) => {
 
   return newCard;
 };
-
-//Закрытие увеличенных фотографий
-popupZoomCloseIcon.addEventListener("click", () => {
-  closePopup(popupZoom);
-});
-
 //Автодобавление начальных карточек
-const cardTemplate = document
-  .querySelector("#card")
-  .content.querySelector(".element");
-const cardContainer = document.querySelector(".elements__list");
-
 initialCards.forEach((item) => {
   cardContainer.append(generateNewCard(item));
 });
-
 // Закрытие попапов нажатием на оверлей
 const handleClosePopup = () => {
   const overlayList = Array.from(document.querySelectorAll(".popup"));
