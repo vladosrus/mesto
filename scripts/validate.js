@@ -38,14 +38,14 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const disabledButton = (button) => {
+const disableSubmitButton = (button) => {
   button.classList.add("popup__submit-button_disabled");
   button.disabled = "disabled";
 };
 
 const toggleButtonState = (inputList, buttonElement, obj) => {
   if (hasInvalidInput(inputList)) {
-    disabledButton(buttonElement, obj);
+    disableSubmitButton(buttonElement, obj);
   } else {
     buttonElement.classList.remove(obj.inactiveButtonClass);
     buttonElement.disabled = "";

@@ -67,7 +67,7 @@ popupCardForm.addEventListener("submit", (evt) => {
   closePopup(popupCard);
   evt.target.reset();
   const button = popupCardForm.querySelector(".popup__submit-button");
-  disabledButton(button);
+  disableSubmitButton(button);
 });
 
 //Слушатель кнопки-крестика для закрытия увеличенных фотографий
