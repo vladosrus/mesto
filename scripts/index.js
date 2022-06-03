@@ -1,17 +1,22 @@
 import { initialCards } from "./cards.js";
 import Card from "./Card.js";
+import { settings, FormValidator } from "./FormValidator.js";
 
 // ПЕРЕМЕННЫЕ
-const popupProfile = document.querySelector(".popup_named_profile");
-const popupProfileName = popupProfile.querySelector(".popup__input_named_name");
-const popupProfileJob = popupProfile.querySelector(".popup__input_named_job");
+export const popupProfile = document.querySelector(".popup_named_profile");
+export const popupProfileName = popupProfile.querySelector(
+  ".popup__input_named_name"
+);
+export const popupProfileJob = popupProfile.querySelector(
+  ".popup__input_named_job"
+);
 const popupProfileForm = popupProfile.querySelector(".popup__form");
 const profileCloseIcon = popupProfile.querySelector(".popup__close-icon");
 
 const popupCard = document.querySelector(".popup_named_card");
 const popupCardImgname = popupCard.querySelector(".popup__input_named_imgname");
 const popupCardLink = popupCard.querySelector(".popup__input_named_link");
-const popupCardForm = popupCard.querySelector(".popup__form");
+export const popupCardForm = popupCard.querySelector(".popup__form");
 const cardCloseIcon = popupCard.querySelector(".popup__close-icon");
 
 export const popupZoom = document.querySelector(".popup_named_zoom");
@@ -34,11 +39,7 @@ editButton.addEventListener("click", () => {
   popupProfileName.value = name.textContent;
   popupProfileJob.value = job.textContent;
 
-  const errorName = popupProfile.querySelector(".name-error");
-  const errorJob = popupProfile.querySelector(".job-error");
-
-  clearInputError(errorName, popupProfileName);
-  clearInputError(errorJob, popupProfileJob);
+  profileValidation.resetValidation();
 });
 
 //Слушатель кнопки-крестика для закрытия попапа редактирования профиля
@@ -69,8 +70,8 @@ popupCardForm.addEventListener("submit", (evt) => {
   );
   closePopup(popupCard);
   evt.target.reset();
-  const button = popupCardForm.querySelector(".popup__submit-button");
-  disabledButton(button);
+
+  cardValidation.resetValidation();
 });
 
 //Слушатель кнопки-крестика для закрытия увеличенных фотографий
@@ -102,6 +103,13 @@ initialCards.forEach((item) => {
   const cardElement = card.generateNewCard();
   cardContainer.append(cardElement);
 });
+
+//Включение валидации
+const profileValidation = new FormValidator(settings, "#profileform");
+profileValidation.enableValidation();
+
+const cardValidation = new FormValidator(settings, "#cardform");
+cardValidation.enableValidation();
 
 // Закрытие попапов нажатием на оверлей
 const handleClosePopup = () => {
