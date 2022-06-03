@@ -33,12 +33,6 @@ editButton.addEventListener("click", () => {
   openPopup(popupProfile);
   popupProfileName.value = name.textContent;
   popupProfileJob.value = job.textContent;
-
-  const errorName = popupProfile.querySelector(".name-error");
-  const errorJob = popupProfile.querySelector(".job-error");
-
-  clearInputError(errorName, popupProfileName);
-  clearInputError(errorJob, popupProfileJob);
 });
 
 //Слушатель кнопки-крестика для закрытия попапа редактирования профиля
@@ -66,8 +60,6 @@ popupCardForm.addEventListener("submit", (evt) => {
   );
   closePopup(popupCard);
   evt.target.reset();
-  const button = popupCardForm.querySelector(".popup__submit-button");
-  disabledButton(button);
 });
 
 //Слушатель кнопки-крестика для закрытия увеличенных фотографий
