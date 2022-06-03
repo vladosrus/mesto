@@ -9,39 +9,49 @@ export default class Card {
 
   _getTemplate() {
     const cardTemplate = document
-      .querySelector("#card")
-      .content.querySelector(".element");
-    const newCard = cardTemplate.cloneNode(true);
-    return newCard;
+      .querySelector(this._cardSelector)
+      .content.querySelector(".element")
+      .cloneNode(true);
+    return cardTemplate;
   }
-  generateNewCard() {
-    this._card = this._getTemplate();
-    const newCardTitle = this._card.querySelector(".element__title");
-    newCardTitle.textContent = this._title;
-    const newCardImage = this._card.querySelector(".element__image");
-    newCardImage.src = this._link;
-    newCardImage.alt = this._title;
+
+  _handleDeliteCard(evt) {
+    evt.target.closest(".element").remove();
+  }
+
+  _handleLikeCard(evt) {
+    evt.target.classList.toggle("element__like-botton_active");
+  }
+
+  _setEventListeners() {
     //Функция лайков
     this._card
       .querySelector(".element__like-botton")
-      .addEventListener("click", (evt) => {
-        evt.target.classList.toggle("element__like-botton_active");
-      });
+      .addEventListener("click", this._handleLikeCard);
 
     //Функция удаления карточек
     this._card
       .querySelector(".element__basket-botton")
-      .addEventListener("click", (evt) => {
-        evt.target.closest(".element").remove();
-      });
+      .addEventListener("click", this._handleDeliteCard);
 
     //Увеличение фотографии
-    newCardImage.addEventListener("click", (evt) => {
+    this._newCardImage.addEventListener("click", () => {
       openPopup(popupZoom);
-      popupZoomImg.src = newCardImage.src;
-      popupZoomImg.alt = newCardImage.alt;
-      popupZoomText.textContent = newCardTitle.textContent;
+      popupZoomImg.src = this._newCardImage.src;
+      popupZoomImg.alt = this._newCardImage.alt;
+      popupZoomText.textContent = this._newCardTitle.textContent;
     });
+  }
+
+  generateNewCard() {
+    this._card = this._getTemplate();
+    this._newCardTitle = this._card.querySelector(".element__title");
+    this._newCardTitle.textContent = this._title;
+    this._newCardImage = this._card.querySelector(".element__image");
+    this._newCardImage.src = this._link;
+    this._newCardImage.alt = this._title;
+
+    this._setEventListeners();
 
     return this._card;
   }
