@@ -1,38 +1,28 @@
 import { initialCards } from "../utils/cards.js";
 import Card from "../components/Card.js";
-import { settings, FormValidator } from "../components/FormValidator.js";
 
-// ПЕРЕМЕННЫЕ
-export const popupProfile = document.querySelector(".popup_named_profile");
-export const popupProfileName = popupProfile.querySelector(
-  ".popup__input_named_name"
-);
-export const popupProfileJob = popupProfile.querySelector(
-  ".popup__input_named_job"
-);
-const popupProfileForm = popupProfile.querySelector(".popup__form");
-const profileCloseIcon = popupProfile.querySelector(".popup__close-icon");
-
-const popupCard = document.querySelector(".popup_named_card");
-const popupCardImgname = popupCard.querySelector(".popup__input_named_imgname");
-const popupCardLink = popupCard.querySelector(".popup__input_named_link");
-export const popupCardForm = popupCard.querySelector(".popup__form");
-const cardCloseIcon = popupCard.querySelector(".popup__close-icon");
-
-export const popupZoom = document.querySelector(".popup_named_zoom");
-const popupZoomCloseIcon = popupZoom.querySelector(".popup__close-icon");
-export const popupZoomImg = document.querySelector(".popup__image");
-export const popupZoomText = document.querySelector(".popup__caption");
-
-const editButton = document.querySelector(".profile__edit-button");
-const addButton = document.querySelector(".profile__add-button");
-const profileTitle = document.querySelector(".profile__title");
-const profileSubtitle = document.querySelector(".profile__subtitle");
-
-const cardContainer = document.querySelector(".elements__list");
-const profileValidation = new FormValidator(settings, "#profileform");
-const cardValidation = new FormValidator(settings, "#cardform");
-const overlayList = Array.from(document.querySelectorAll(".popup"));
+import {
+  popupProfile,
+  popupProfileName,
+  popupProfileJob,
+  popupProfileForm,
+  profileCloseIcon,
+  popupCard,
+  popupCardImgname,
+  popupCardLink,
+  popupCardForm,
+  cardCloseIcon,
+  popupZoom,
+  popupZoomCloseIcon,
+  editButton,
+  addButton,
+  profileTitle,
+  profileSubtitle,
+  cardContainer,
+  profileValidation,
+  cardValidation,
+  overlayList
+} from "../utils/constants.js";
 
 //ФУНКЦИИ
 
