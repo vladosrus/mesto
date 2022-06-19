@@ -1,6 +1,6 @@
-import { initialCards } from "./cards.js";
-import Card from "./Card.js";
-import { settings, FormValidator } from "./FormValidator.js";
+import { initialCards } from "../utils/cards.js";
+import Card from "../components/Card.js";
+import { settings, FormValidator } from "../components/FormValidator.js";
 
 // ПЕРЕМЕННЫЕ
 export const popupProfile = document.querySelector(".popup_named_profile");
