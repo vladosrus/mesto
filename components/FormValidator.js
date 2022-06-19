@@ -3,7 +3,7 @@ import {
   popupProfileName,
   popupProfileJob,
   popupCardForm,
-} from "./index.js";
+} from "../utils/constants.js";
 
 export const settings = {
   inputSelector: ".popup__input",

@@ -1,43 +1,34 @@
-import { initialCards } from "./cards.js";
-import Card from "./Card.js";
-import { settings, FormValidator } from "./FormValidator.js";
+import { initialCards } from "../utils/cards.js";
+import Card from "../components/Card.js";
+import { settings, FormValidator } from "../components/FormValidator.js";
 
-// ПЕРЕМЕННЫЕ
-export const popupProfile = document.querySelector(".popup_named_profile");
-export const popupProfileName = popupProfile.querySelector(
-  ".popup__input_named_name"
-);
-export const popupProfileJob = popupProfile.querySelector(
-  ".popup__input_named_job"
-);
-const popupProfileForm = popupProfile.querySelector(".popup__form");
-const profileCloseIcon = popupProfile.querySelector(".popup__close-icon");
-
-const popupCard = document.querySelector(".popup_named_card");
-const popupCardImgname = popupCard.querySelector(".popup__input_named_imgname");
-const popupCardLink = popupCard.querySelector(".popup__input_named_link");
-export const popupCardForm = popupCard.querySelector(".popup__form");
-const cardCloseIcon = popupCard.querySelector(".popup__close-icon");
-
-export const popupZoom = document.querySelector(".popup_named_zoom");
-const popupZoomCloseIcon = popupZoom.querySelector(".popup__close-icon");
-export const popupZoomImg = document.querySelector(".popup__image");
-export const popupZoomText = document.querySelector(".popup__caption");
-
-const editButton = document.querySelector(".profile__edit-button");
-const addButton = document.querySelector(".profile__add-button");
-const name = document.querySelector(".profile__title");
-const job = document.querySelector(".profile__subtitle");
-
-const cardContainer = document.querySelector(".elements__list");
+import {
+  popupProfile,
+  popupProfileName,
+  popupProfileJob,
+  popupProfileForm,
+  profileCloseIcon,
+  popupCard,
+  popupCardImgname,
+  popupCardLink,
+  popupCardForm,
+  cardCloseIcon,
+  popupZoom,
+  popupZoomCloseIcon,
+  editButton,
+  addButton,
+  profileTitle,
+  profileSubtitle,
+  cardContainer,
+} from "../utils/constants.js";
 
 //ОБРАБОТЧИКИ
 
 //Слушатель кнопки открытия попапа редактирования профиля
 editButton.addEventListener("click", () => {
   openPopup(popupProfile);
-  popupProfileName.value = name.textContent;
-  popupProfileJob.value = job.textContent;
+  popupProfileName.value = profileTitle.textContent;
+  popupProfileJob.value = profileSubtitle.textContent;
 
   profileValidation.resetValidation();
 });
@@ -49,8 +40,8 @@ profileCloseIcon.addEventListener("click", () => closePopup(popupProfile));
 popupProfileForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   closePopup(popupProfile);
-  name.textContent = popupProfileName.value;
-  job.textContent = popupProfileJob.value;
+  profileTitle.textContent = popupProfileName.value;
+  profileSubtitle.textContent = popupProfileJob.value;
 });
 
 //Слушатель кнопки открытия попапа добавления карточек

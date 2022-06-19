@@ -1,4 +1,5 @@
-import { openPopup, popupZoom, popupZoomImg, popupZoomText } from "./index.js";
+import { popupZoom, popupZoomImg, popupZoomText } from "../utils/constants.js";
+import { openPopup } from "../pages/index.js";
 
 export default class Card {
   constructor(initialCards, cardSelector) {
