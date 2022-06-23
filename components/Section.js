@@ -9,7 +9,7 @@ export default class Section {
     this._container.append(element);
   }
   clear() {
-    this._container.innerHTML = '';
+    this._container.innerHTML = "";
   }
 
   renderItems() {
@@ -17,4 +17,4 @@ export default class Section {
       this._renderer(item);
     });
   }
-} 
+}
