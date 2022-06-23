@@ -1,5 +1,7 @@
 import { initialCards } from "../utils/cards.js";
 import Card from "../components/Card.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import Section from "../components/Section.js";
 
 import {
   popupProfile,
@@ -24,33 +26,36 @@ import {
   overlayList
 } from "../utils/constants.js";
 
-//ФУНКЦИИ
 
-//Открытие попапа редактирования профиля
-export function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", handlePressEscape);
-}
-//Закрытие на кнопку ESC
-function handlePressEscape(evt) {
-  if (evt.key === "Escape") {
-    const findPopup = document.querySelector(".popup_opened");
-    closePopup(findPopup);
+
+
+const startCards = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card({
+      data: item,
+      handleCardClick: (name, link) => {
+        const openPopupImage = new PopupWithImage({
+          name: name,
+          link: link
+        }, popupZoom);
+        openPopupImage.open();
+        openPopupImage.setEventListener();
+      }
+    }, ".card");
+    const cardElement = card.generateNewCard();
+    startCards.addItem(cardElement);
   }
-}
-//Закрытие попапа редактирования профиля
-function closePopup(popup) {
-  document.removeEventListener("keydown", handlePressEscape);
-  popup.classList.remove("popup_opened");
-}
-
+}, cardContainer)
+startCards.renderItems()
+/*
 //Автодобавление начальных карточек
 initialCards.forEach((item) => {
   const card = new Card(item, ".card");
   const cardElement = card.generateNewCard();
   cardContainer.append(cardElement);
 });
-
+*/
 //Включение валидации
 profileValidation.enableValidation();
 cardValidation.enableValidation();
@@ -79,8 +84,6 @@ editButton.addEventListener("click", () => {
   profileValidation.resetValidation();
 });
 
-//Слушатель кнопки-крестика для закрытия попапа редактирования профиля
-profileCloseIcon.addEventListener("click", () => closePopup(popupProfile));
 
 //Измение текста в профиле
 popupProfileForm.addEventListener("submit", (evt) => {
