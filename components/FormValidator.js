@@ -2,16 +2,7 @@ import {
   popupProfile,
   popupProfileName,
   popupProfileJob,
-  popupCardForm,
 } from "../utils/constants.js";
-
-export const settings = {
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__submit-button",
-  inactiveButtonClass: "popup__submit-button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__input-error_visible",
-};
 
 export class FormValidator {
   constructor(object, formSelector) {
@@ -55,23 +46,19 @@ export class FormValidator {
     }
   }
 
-  _hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
+  _hasInvalidInput() {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
 
-  _disabledButton(button) {
-    button.classList.add("popup__submit-button_disabled");
-    button.disabled = "disabled";
-  }
-
-  _toggleButtonState(inputList, buttonElement) {
-    if (this._hasInvalidInput(inputList)) {
-      this._disabledButton(buttonElement);
+  _toggleButtonState() {
+    if (this._hasInvalidInput(this._inputList)) {
+      this._buttonElement.classList.add(this._inactiveButtonClass);
+      this._buttonElement.setAttribute("disabled", true);
     } else {
-      buttonElement.classList.remove(this._inactiveButtonClass);
-      buttonElement.disabled = "";
+      this._buttonElement.classList.remove(this._inactiveButtonClass);
+      this._buttonElement.removeAttribute("disabled", true);
     }
   }
 
@@ -107,7 +94,6 @@ export class FormValidator {
     this._clearInputError(this._errorName, popupProfileName);
     this._clearInputError(this._errorJob, popupProfileJob);
 
-    this._button = popupCardForm.querySelector(".popup__submit-button");
-    this._disabledButton(this._button);
+    this._toggleButtonState();
   }
 }

@@ -8,4 +8,13 @@ class Section {
   addItem(element) {
     this._container.append
   }
+  clear() {
+    this._container.innerHTML = "";
+  }
+
+  renderItems() {
+    this._renderedItems.forEach((item) => {
+      this._renderer(item);
+    });
+  }
 }
