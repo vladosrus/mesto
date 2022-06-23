@@ -1,5 +1,4 @@
 import { settings, FormValidator } from "../components/FormValidator.js";
-import Popup from "../components/Popup.js";
 
 export const popupProfile = document.querySelector(".popup_named_profile");
 export const popupProfileName = popupProfile.querySelector(

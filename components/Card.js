@@ -1,13 +1,14 @@
+import { popupZoom, popupZoomImg, popupZoomText } from "../utils/constants.js";
+import { openPopup } from "../pages/index.js";
+
 export default class Card {
-  constructor( { data, handleCardClick }, cardSelector) {
-    this._title = data.name;
-    this._link = data.link;
+  constructor(initialCards, cardSelector) {
+    this._title = initialCards.name;
+    this._link = initialCards.link;
     this._cardSelector = cardSelector;
-    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
-    debugger
     const cardTemplate = document
       .querySelector(this._cardSelector)
       .content.querySelector(".element")
@@ -23,10 +24,6 @@ export default class Card {
     evt.target.classList.toggle("element__like-botton_active");
   }
 
-  _handleCardClick() {
-    this._handleCardClick(this._title, this._link)
-  }
-
   _setEventListeners() {
     //Функция лайков
     this._card
@@ -38,14 +35,19 @@ export default class Card {
       .querySelector(".element__basket-botton")
       .addEventListener("click", this._handleDeliteCard);
 
-      this._card
-      .querySelector(".element__image")
-      .addEventListener("click", this._handleCardClick);
+    //Увеличение фотографии
+    this._newCardImage.addEventListener("click", () => {
+      openPopup(popupZoom);
+      popupZoomImg.src = this._newCardImage.src;
+      popupZoomImg.alt = this._newCardImage.alt;
+      popupZoomText.textContent = this._newCardTitle.textContent;
+    });
   }
 
   generateNewCard() {
     this._card = this._getTemplate();
-    this._card.querySelector(".element__title").textContent = this._title;
+    this._newCardTitle = this._card.querySelector(".element__title");
+    this._newCardTitle.textContent = this._title;
     this._newCardImage = this._card.querySelector(".element__image");
     this._newCardImage.src = this._link;
     this._newCardImage.alt = this._title;
