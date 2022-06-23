@@ -1,11 +1,9 @@
-import { popupZoom, popupZoomImg, popupZoomText } from "../utils/constants.js";
-import { openPopup } from "../pages/index.js";
-
 export default class Card {
   constructor({ data, handleCardClick }, cardSelector) {
     this._title = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -48,8 +46,7 @@ export default class Card {
 
   generateNewCard() {
     this._card = this._getTemplate();
-    this._newCardTitle = this._card.querySelector(".element__title");
-    this._newCardTitle.textContent = this._title;
+    this._card.querySelector(".element__title").textContent = this._title;
     this._newCardImage = this._card.querySelector(".element__image");
     this._newCardImage.src = this._link;
     this._newCardImage.alt = this._title;
