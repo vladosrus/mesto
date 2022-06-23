@@ -7,7 +7,6 @@ export default class Card {
   }
 
   _getTemplate() {
-    debugger
     const cardTemplate = document
       .querySelector(this._cardSelector)
       .content.querySelector(".element")
@@ -40,7 +39,9 @@ export default class Card {
 
       this._card
       .querySelector(".element__image")
-      .addEventListener("click", this._handleCardClick);
+      .addEventListener("click", () => {
+        this._handleCardClick(this._title, this._link);
+      });
   }
 
   generateNewCard() {
