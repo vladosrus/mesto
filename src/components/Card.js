@@ -22,10 +22,6 @@ export default class Card {
     evt.target.classList.toggle("element__like-botton_active");
   }
 
-  _handleCardClick() {
-    this._handleCardClick(this._title, this._link);
-  }
-
   _setEventListeners() {
     //Функция лайков
     this._card
@@ -37,11 +33,9 @@ export default class Card {
       .querySelector(".element__basket-botton")
       .addEventListener("click", this._handleDeliteCard);
 
-    this._card
-      .querySelector(".element__image")
-      .addEventListener("click", () => {
-        this._handleCardClick(this._title, this._link);
-      });
+    this._newCardImage.addEventListener("click", () => {
+      this._handleCardClick(this._title, this._link);
+    });
   }
 
   generateNewCard() {
