@@ -1,48 +1,36 @@
-import {
-  popupProfile,
-  popupProfileName,
-  popupProfileJob,
-} from "../utils/constants.js";
-
-export class FormValidator {
-  constructor(object, formSelector) {
-    this._formSelector = formSelector;
+export default class FormValidator {
+  constructor(object, form) {
+    this._form = form;
     this._inputSelector = object.inputSelector;
     this._submitButtonSelector = object.submitButtonSelector;
     this._inactiveButtonClass = object.inactiveButtonClass;
     this._inputErrorClass = object.inputErrorClass;
     this._errorClass = object.errorClass;
+    this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
+    this._buttonElement = this._form.querySelector(this._submitButtonSelector);
   }
   // Функция показывающая ошибку после валидации
-  _showInputError(formElement, inputElement, errorMessage) {
-    this._errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  _showInputError(inputElement, errorMessage) {
+    const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
-    this._errorElement.textContent = errorMessage;
-    this._errorElement.classList.add(this._errorClass);
-  }
-
-  _clearInputError(error, input) {
-    error.textContent = "";
-    input.classList.remove("popup__input_type_error");
-    error.classList.remove("popup__input-error_visible");
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add(this._errorClass);
   }
 
   // Функция убирающая отображение ошибки
-  _hideInputError(formElement, inputElement) {
-    this._errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    this._clearInputError(this._errorElement, inputElement);
+  _hideInputError(inputElement) {
+    this._errorElement = this._form.querySelector(`.${inputElement.id}-error`);
+    this._errorElement.textContent = "";
+    inputElement.classList.remove(this._inputErrorClass);
+    this._errorElement.classList.remove(this._errorClass);
   }
 
   // Функция проверки полей на валидность
-  _checkInputValidity(formElement, inputElement) {
+  _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
-      this._showInputError(
-        formElement,
-        inputElement,
-        inputElement.validationMessage
-      );
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-      this._hideInputError(formElement, inputElement);
+      this._hideInputError(inputElement);
     }
   }
 
@@ -53,7 +41,7 @@ export class FormValidator {
   }
 
   _toggleButtonState() {
-    if (this._hasInvalidInput(this._inputList)) {
+    if (this._hasInvalidInput()) {
       this._buttonElement.classList.add(this._inactiveButtonClass);
       this._buttonElement.setAttribute("disabled", true);
     } else {
@@ -63,37 +51,29 @@ export class FormValidator {
   }
 
   // Функция добавления слушателей, вызывающих функцию проверки поля для ввода
-  _setEventListeners(formElement) {
-    this._inputList = Array.from(
-      formElement.querySelectorAll(this._inputSelector)
-    );
-    this._buttonElement = formElement.querySelector(this._submitButtonSelector);
-
-    this._toggleButtonState(this._inputList, this._buttonElement);
+  _setEventListeners() {
+    this._toggleButtonState();
 
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
-        this._checkInputValidity(formElement, inputElement);
-        this._toggleButtonState(this._inputList, this._buttonElement);
+        this._checkInputValidity(inputElement);
+        this._toggleButtonState();
       });
     });
   }
 
-  // Функция включения валидации (ищет все формы и вызывает функцию добавления слушателей)
+  // Функция включения валидации (вызывает функцию добавления слушателей)
   enableValidation() {
-    this._formElement = document.querySelector(this._formSelector);
-    this._formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-    this._setEventListeners(this._formElement);
+    this._setEventListeners();
   }
 
   resetValidation() {
-    this._errorName = popupProfile.querySelector(".name-error");
-    this._errorJob = popupProfile.querySelector(".job-error");
-    this._clearInputError(this._errorName, popupProfileName);
-    this._clearInputError(this._errorJob, popupProfileJob);
-
     this._toggleButtonState();
+    
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+
+    
   }
 }

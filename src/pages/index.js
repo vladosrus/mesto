@@ -1,5 +1,6 @@
 import './index.css';
 import { initialCards } from "../utils/cards.js";
+import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
@@ -17,8 +18,9 @@ import {
   profileTitle,
   profileSubtitle,
   cardContainer,
-  profileValidation,
-  cardValidation,
+  profileForm,
+  cardForm,
+  settings
 } from "../utils/constants.js";
 
 //Добавление начальных карточек
@@ -111,5 +113,7 @@ addButton.addEventListener("click", () => {
 });
 
 //Включение валидации в попапах
+const profileValidation = new FormValidator(settings, profileForm);
+const cardValidation = new FormValidator(settings, cardForm);
 profileValidation.enableValidation();
 cardValidation.enableValidation();

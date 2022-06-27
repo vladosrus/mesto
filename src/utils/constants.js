@@ -1,5 +1,3 @@
-import { FormValidator } from "../components/FormValidator.js";
-
 export const popupProfile = document.querySelector(".popup_named_profile");
 export const popupProfileName = popupProfile.querySelector(
   ".popup__input_named_name"
@@ -11,6 +9,12 @@ export const profileTitle = document.querySelector(".profile__title");
 export const profileSubtitle = document.querySelector(".profile__subtitle");
 
 export const popupCard = document.querySelector(".popup_named_card");
+export const popupCardImgName = popupProfile.querySelector(
+  ".popup__input_named_imgname"
+);
+export const popupCardLink = popupProfile.querySelector(
+  ".popup__input_named_link"
+);
 
 export const popupZoom = document.querySelector(".popup_named_zoom");
 export const popupZoomImg = document.querySelector(".popup__image");
@@ -28,5 +32,6 @@ export const settings = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input-error_visible",
 };
-export const profileValidation = new FormValidator(settings, "#profileform");
-export const cardValidation = new FormValidator(settings, "#cardform");
+export const profileForm = document.querySelector("#profileform");
+export const cardForm = document.querySelector("#cardform");
+
