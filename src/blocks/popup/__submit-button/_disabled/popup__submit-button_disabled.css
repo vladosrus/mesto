@@ -6,6 +6,5 @@
     cursor: default;
 }
 .popup__submit-button_disabled:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #ffffff;
+    opacity: 0.2;
 }
