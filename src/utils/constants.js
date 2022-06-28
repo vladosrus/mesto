@@ -17,8 +17,8 @@ export const popupCardLink = popupProfile.querySelector(
 );
 
 export const popupZoom = document.querySelector(".popup_named_zoom");
-export const popupZoomImg = document.querySelector(".popup__image");
-export const popupZoomText = document.querySelector(".popup__caption");
+export const popupZoomImg = popupZoom.querySelector(".popup__image");
+export const popupZoomText = popupZoom.querySelector(".popup__caption");
 
 export const editButton = document.querySelector(".profile__edit-button");
 export const addButton = document.querySelector(".profile__add-button");

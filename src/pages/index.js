@@ -10,7 +10,6 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import {
   popupProfileName,
   popupProfileJob,
-  popupZoom,
   editButton,
   addButton,
   profileTitle,
@@ -29,15 +28,9 @@ const startCards = new Section(
       const card = new Card(
         {
           data: item,
-          handleCardClick: (name, link) => {
-            const openPopupImage = new PopupWithImage(
-              {
-                name: name,
-                link: link,
-              },
-              popupZoom
-            );
-            openPopupImage.open();
+          handleCardClick: () => {
+            const openPopupImage = new PopupWithImage(".popup_named_zoom");
+            openPopupImage.open(item);
             openPopupImage.setEventListeners();
           },
         },
@@ -84,15 +77,9 @@ const cardPopupWithForm = new PopupWithForm({
     const card = new Card(
       {
         data: inputValues,
-        handleCardClick: (title, link) => {
-          const openPopupImage = new PopupWithImage(
-            {
-              name: title,
-              link: link,
-            },
-            popupZoom
-          );
-          openPopupImage.open();
+        handleCardClick: () => {
+          const openPopupImage = new PopupWithImage(".popup_named_zoom");
+          openPopupImage.open(item);
           openPopupImage.setEventListeners();
         },
       },
