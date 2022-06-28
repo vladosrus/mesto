@@ -8,10 +8,8 @@ import UserInfo from "../components/UserInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 
 import {
-  popupProfile,
   popupProfileName,
   popupProfileJob,
-  popupCard,
   popupZoom,
   editButton,
   addButton,
@@ -65,7 +63,7 @@ const profilePopupWithForm = new PopupWithForm({
     userInfo.setUserInfo(inputValues);
     profilePopupWithForm.close();
   },
-  popupSelector: popupProfile,
+  popupSelector: ".popup_named_profile",
 });
 
 //Слушатель кнопки открытия попапа редактирования данных пользователя
@@ -102,7 +100,7 @@ const cardPopupWithForm = new PopupWithForm({
     );
     cardContainer.prepend(card.generateNewCard());
   },
-  popupSelector: popupCard,
+  popupSelector: ".popup_named_card",
 });
 
 //Слушатель кнопки открытия попапа добавления новых карточек
