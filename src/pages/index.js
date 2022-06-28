@@ -14,7 +14,6 @@ import {
   addButton,
   profileTitle,
   profileSubtitle,
-  cardContainer,
   profileForm,
   cardForm,
   settings
@@ -40,7 +39,7 @@ const startCards = new Section(
       startCards.addItem(cardElement);
     },
   },
-  cardContainer
+  ".elements__list"
 );
 startCards.renderItems();
 
@@ -85,7 +84,7 @@ const cardPopupWithForm = new PopupWithForm({
       },
       ".card"
     );
-    cardContainer.prepend(card.generateNewCard());
+    startCards.addItem(card.generateNewCard())
   },
   popupSelector: ".popup_named_card",
 });
