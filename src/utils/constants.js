@@ -5,8 +5,6 @@ export const popupProfileName = popupProfile.querySelector(
 export const popupProfileJob = popupProfile.querySelector(
   ".popup__input_named_job"
 );
-export const profileTitle = document.querySelector(".profile__title");
-export const profileSubtitle = document.querySelector(".profile__subtitle");
 
 export const editButton = document.querySelector(".profile__edit-button");
 export const addButton = document.querySelector(".profile__add-button");

@@ -12,8 +12,6 @@ import {
   popupProfileJob,
   editButton,
   addButton,
-  profileTitle,
-  profileSubtitle,
   profileForm,
   cardForm,
   settings
@@ -45,8 +43,8 @@ startCards.renderItems();
 
 //Класс работы с данными пользователя
 const userInfo = new UserInfo({
-  title: profileTitle,
-  subtitle: profileSubtitle,
+  titleSelector: ".profile__title",
+  subtitleSelector: ".profile__subtitle",
 });
 
 //Попап редактирования данных пользователя
