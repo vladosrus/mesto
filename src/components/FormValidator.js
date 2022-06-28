@@ -6,7 +6,9 @@ export default class FormValidator {
     this._inactiveButtonClass = object.inactiveButtonClass;
     this._inputErrorClass = object.inputErrorClass;
     this._errorClass = object.errorClass;
-    this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
+    this._inputList = Array.from(
+      this._form.querySelectorAll(this._inputSelector)
+    );
     this._buttonElement = this._form.querySelector(this._submitButtonSelector);
   }
   // Функция показывающая ошибку после валидации
@@ -69,11 +71,9 @@ export default class FormValidator {
 
   resetValidation() {
     this._toggleButtonState();
-    
+
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
-
-    
   }
 }

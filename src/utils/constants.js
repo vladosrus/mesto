@@ -18,4 +18,3 @@ export const settings = {
 };
 export const profileForm = document.querySelector("#profileform");
 export const cardForm = document.querySelector("#cardform");
-

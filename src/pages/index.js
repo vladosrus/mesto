@@ -1,4 +1,4 @@
-import './index.css';
+import "./index.css";
 import { initialCards } from "../utils/cards.js";
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
@@ -14,34 +14,40 @@ import {
   addButton,
   profileForm,
   cardForm,
-  settings
+  settings,
 } from "../utils/constants.js";
+
+//Инстанцирование класса PopupWithImage и установка слушателей
+const openPopupImage = new PopupWithImage(".popup_named_zoom");
+openPopupImage.setEventListeners();
+
+//Инстанцирование класса Card
+function createCard(item) {
+  const card = new Card(
+    {
+      data: item,
+      handleCardClick: () => {
+        openPopupImage.open(item);
+      },
+    },
+    ".card"
+  );
+  return card;
+}
 
 //Добавление начальных карточек
 const startCards = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(
-        {
-          data: item,
-          handleCardClick: () => {
-            const openPopupImage = new PopupWithImage(".popup_named_zoom");
-            openPopupImage.open(item);
-            openPopupImage.setEventListeners();
-          },
-        },
-        ".card"
-      );
-      const cardElement = card.generateNewCard();
-      startCards.addItem(cardElement);
+      startCards.addItem(createCard(item).generateNewCard());
     },
   },
   ".elements__list"
 );
 startCards.renderItems();
 
-//Класс работы с данными пользователя
+//Инстанцирование класса работы с данными пользователя
 const userInfo = new UserInfo({
   titleSelector: ".profile__title",
   subtitleSelector: ".profile__subtitle",
@@ -55,13 +61,14 @@ const profilePopupWithForm = new PopupWithForm({
   },
   popupSelector: ".popup_named_profile",
 });
+profilePopupWithForm.setEventListeners();
 
 //Слушатель кнопки открытия попапа редактирования данных пользователя
 editButton.addEventListener("click", () => {
-  popupProfileName.value = userInfo.getUserInfo().title;
-  popupProfileJob.value = userInfo.getUserInfo().subtitle;
+  const userInformation = userInfo.getUserInfo();
+  popupProfileName.value = userInformation.title;
+  popupProfileJob.value = userInformation.subtitle;
   profilePopupWithForm.open();
-  profilePopupWithForm.setEventListeners();
   profileValidation.resetValidation();
 });
 
@@ -71,26 +78,15 @@ const cardPopupWithForm = new PopupWithForm({
     inputValues["name"] = inputValues["imgname"];
     delete inputValues["imgname"];
     cardPopupWithForm.close();
-    const card = new Card(
-      {
-        data: inputValues,
-        handleCardClick: () => {
-          const openPopupImage = new PopupWithImage(".popup_named_zoom");
-          openPopupImage.open(item);
-          openPopupImage.setEventListeners();
-        },
-      },
-      ".card"
-    );
-    startCards.addItem(card.generateNewCard())
+    startCards.addItem(createCard(inputValues).generateNewCard());
   },
   popupSelector: ".popup_named_card",
 });
+cardPopupWithForm.setEventListeners();
 
 //Слушатель кнопки открытия попапа добавления новых карточек
 addButton.addEventListener("click", () => {
   cardPopupWithForm.open();
-  cardPopupWithForm.setEventListeners();
   cardValidation.resetValidation();
 });
 
