@@ -32,7 +32,7 @@ function createCard(item) {
     },
     ".card"
   );
-  return card;
+  return card.generateNewCard();
 }
 
 //Добавление начальных карточек
@@ -40,7 +40,7 @@ const startCards = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      startCards.addItem(createCard(item).generateNewCard());
+      startCards.addItem(createCard(item));
     },
   },
   ".elements__list"
@@ -78,7 +78,7 @@ const cardPopupWithForm = new PopupWithForm({
     inputValues["name"] = inputValues["imgname"];
     delete inputValues["imgname"];
     cardPopupWithForm.close();
-    startCards.addItem(createCard(inputValues).generateNewCard());
+    startCards.addItem(createCard(inputValues));
   },
   popupSelector: ".popup_named_card",
 });
