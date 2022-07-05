@@ -1,7 +1,7 @@
-.element__like-botton {
+.element__like-button {
     min-width: 22px;
     min-height: 19px;
-    margin: 0px 0px 6px;
+    margin: 0px 0px 3px;
     cursor: pointer;
     border: none;
     background: none;
@@ -10,6 +10,6 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-.element__like-botton:hover {
+.element__like-button:hover {
     opacity: 0.5;
 }

@@ -1,4 +1,4 @@
-.element__basket-botton {
+.element__basket-button {
     min-width: 18px;
     min-height: 19px;
     background: none;
@@ -13,6 +13,6 @@
     border: none;
     padding: 0px;
 }
-.element__basket-botton:hover {
+.element__basket-button:hover {
     opacity: 0.6;
 }
