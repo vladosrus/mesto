@@ -71,6 +71,20 @@
                     </form>
                 </div>
             </div>
+        <!-- Попап обновления фото профиля -->
+            <div class="popup popup_named_profile-image">
+                <div class="popup__container">
+                    <h2 class="popup__title">Обновить аватар</h2>
+                    <button class="popup__close-icon" type="button"></button>
+                    <form class="popup__form" name="image" id="imageform" novalidate>
+                        <div class="popup__input-container">
+                            <input id="link" class="popup__input popup__input_named_link" type="url" placeholder="Ссылка на картинку" required>
+                            <span class="popup__input-error link-error"></span>
+                        </div>
+                        <button class="popup__submit-button" type="submit">Сохранить</button>
+                    </form>
+                </div>
+            </div>
         <!-- Попап добавления карточек -->
             <div class="popup popup_named_card">
                 <div class="popup__container">

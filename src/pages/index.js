@@ -7,14 +7,14 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import Api from "../components/Api.js";
-import Popup from "../components/Popup";
+import PopupWithoutForm from "../components/PopupWithoutForm.js";
 
 import {
   popupProfileName,
   popupProfileJob,
   editButton,
   addButton,
-  basketButton,
+  editImgButton,
   profileForm,
   cardForm,
   settings,
@@ -36,9 +36,6 @@ const userInfo = new UserInfo({
   subtitleSelector: ".profile__subtitle",
   profileAvatarSelector: ".profile__avatar",
 });
-
-
-
 
 //Добавление данных профиля на страницу
 let myId = null;
@@ -80,6 +77,28 @@ editButton.addEventListener("click", () => {
   profileValidation.resetValidation();
 });
 
+const imagePopupWithForm = new PopupWithForm({
+  submitForm: (inputValues) => {
+    api
+      .changeProfileImg(inputValues)
+      .then((result) => {
+        userInfo.setUserInfo(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    imagePopupWithForm.close();
+  },
+  popupSelector: ".popup_named_profile-image",
+});
+imagePopupWithForm.setEventListeners();
+
+//Слушатель кнопки открытия попапа редактирования аватарки пользователя
+editImgButton.addEventListener("click", () => {
+  imagePopupWithForm.open();
+  cardValidation.resetValidation();
+});
+
 //РАБОТА С КАРТОЧКАМИ
 function createConstStartCards(items) {
   const startCards = new Section(
@@ -95,22 +114,27 @@ function createConstStartCards(items) {
 }
 
 //Добавление начальных карточек
-api
-  .getInitialCards()
-  .then((result) => {
-    createConstStartCards(result).renderItems();
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+function renderInitialCards() {
+  api
+    .getInitialCards()
+    .then((result) => {
+      createConstStartCards(result).renderItems();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+renderInitialCards();
 
 ////Инстанцирование класса Popup и установка слушателей
-const openPopup = new Popup(".popup_named_delete");
-openPopup.setEventListeners();
+const deleteCardPopup = new PopupWithoutForm(".popup_named_delete");
+deleteCardPopup.setEventListeners();
 
 //Инстанцирование класса PopupWithImage и установка слушателей
 const openPopupImage = new PopupWithImage(".popup_named_zoom");
 openPopupImage.setEventListeners();
+
+//Удаление карточек
 
 //Инстанцирование класса Card
 function createCard(item) {
@@ -122,7 +146,18 @@ function createCard(item) {
         openPopupImage.open(item);
       },
       handleBucketClick: () => {
-        openPopup.open();
+        deleteCardPopup.open();
+        deleteCardPopup.setSubmitFunction((item) => {
+          api
+            .deleteCard(item._id)
+            .then(() => {
+              renderInitialCards();
+              deleteCardPopup.close();
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
       },
     },
     ".card"
@@ -138,7 +173,7 @@ const cardPopupWithForm = new PopupWithForm({
     api
       .addNewCard(inputValues)
       .then((result) => {
-        createConstStartCards(result).addItem(createCard(inputValues));
+        createConstStartCards(result).addItem(createCard(result));
       })
       .catch((error) => {
         console.log(error);
@@ -160,3 +195,11 @@ const profileValidation = new FormValidator(settings, profileForm);
 const cardValidation = new FormValidator(settings, cardForm);
 profileValidation.enableValidation();
 cardValidation.enableValidation();
+
+//Добавление прелоадеров на страницу
+const renderLoading = (isLoading) => {
+  const submitButton = document.querySelector(".popup__submit-button");
+  if (isLoading) {
+    submitButton.textContent = "Сохранение...";
+  }
+};

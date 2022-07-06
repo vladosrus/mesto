@@ -48,6 +48,23 @@ export default class Api {
     });
   }
 
+  changeProfileImg(data) {
+    return fetch(`${this._baseURL}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data['link']
+      })
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+
   addNewCard(data) {
     return fetch(`${this._baseURL}/cards`, {
         method: 'POST',
@@ -64,5 +81,19 @@ export default class Api {
   
         return Promise.reject(`Ошибка: ${res.status}`);
       });
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._baseURL}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
   }
 }

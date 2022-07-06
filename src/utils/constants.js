@@ -8,6 +8,7 @@ export const popupProfileJob = popupProfile.querySelector(
 
 export const editButton = document.querySelector(".profile__edit-button");
 export const addButton = document.querySelector(".profile__add-button");
+export const editImgButton = document.querySelector(".profile__avatar-overlay");
 
 export const settings = {
   inputSelector: ".popup__input",
