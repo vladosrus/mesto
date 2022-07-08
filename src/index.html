@@ -18,7 +18,7 @@
         <main>
             <section class="profile">
                 <div class="profile__avatar-container">
-                    <img src="" alt="Фото профиля" class="profile__avatar">
+                    <img src="#" alt="Фото профиля" class="profile__avatar">
                     <div class="profile__avatar-overlay">
                         <img src="<%=require('./images/editProfileImg-button.svg')%>" alt="Карандаш" class="profile__editImg-button">
                     </div>
@@ -78,8 +78,8 @@
                     <button class="popup__close-icon" type="button"></button>
                     <form class="popup__form" name="image" id="imageform" novalidate>
                         <div class="popup__input-container">
-                            <input id="link" class="popup__input popup__input_named_link" type="url" placeholder="Ссылка на картинку" required>
-                            <span class="popup__input-error link-error"></span>
+                            <input id="profileImgLink" class="popup__input popup__input_named_link" type="url" placeholder="Ссылка на картинку" required>
+                            <span class="popup__input-error profileImgLink-error"></span>
                         </div>
                         <button class="popup__submit-button" type="submit">Сохранить</button>
                     </form>
@@ -96,8 +96,8 @@
                             <span class="popup__input-error imgname-error" ></span>
                         </div>
                         <div class="popup__input-container">
-                            <input id="link" class="popup__input popup__input_named_link" type="url" placeholder="Ссылка на картинку" required>
-                            <span class="popup__input-error link-error"></span>
+                            <input id="cardImgLink" class="popup__input popup__input_named_link" type="url" placeholder="Ссылка на картинку" required>
+                            <span class="popup__input-error cardImgLink-error"></span>
                         </div>
                         <button class="popup__submit-button" type="submit">Создать</button>
                     </form>

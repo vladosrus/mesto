@@ -50,7 +50,7 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data["link"],
+        avatar: data["profileImgLink"],
       }),
     }).then((res) => {
       if (res.ok) {
@@ -67,7 +67,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify({
         name: data["name"],
-        link: data["link"],
+        link: data["cardImgLink"],
       }),
     }).then((res) => {
       if (res.ok) {
