@@ -27,6 +27,14 @@ export default class PopupWithForm extends Popup {
     this._form.reset();
   }
 
+  isLoading(isLoad, defaultText, loading) {
+    if (isLoad) {
+        this._submitButton.textContent = loading;
+    } else {
+        this._submitButton.textContent = defaultText;
+    }
+};
+
   _handleSubmitForm = (evt) => {
     evt.preventDefault();
     this._submitForm(this._getInputValues());
