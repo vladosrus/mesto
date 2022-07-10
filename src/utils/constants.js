@@ -10,13 +10,16 @@ export const editButton = document.querySelector(".profile__edit-button");
 export const addButton = document.querySelector(".profile__add-button");
 export const editImgButton = document.querySelector(".profile__avatar-overlay");
 
-export const settings = {
+export const validationConfig = {
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__submit-button",
   inactiveButtonClass: "popup__submit-button_disabled",
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input-error_visible",
 };
+export const profileTitleSelector = ".profile__title";
+export const profileSubtitleSelector = ".profile__subtitle";
+export const profileAvatarSelector = ".profile__avatar";
 export const profileForm = document.querySelector("#profileform");
 export const cardForm = document.querySelector("#cardform");
 export const imageForm = document.querySelector("#imageform");

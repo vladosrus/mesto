@@ -36,20 +36,10 @@ export default class Card {
 
   //Клонирование template-элемента карточки и установка кнопки удаления на мои карточки
   _getTemplate() {
-    const isMyId = this._checkCardId();
-    if (isMyId === false) {
-      const cardTemplate = this._cardContainer.content
-        .querySelector(".element")
-        .cloneNode(true);
-      const basket = cardTemplate.querySelector(".element__basket-button");
-      basket.remove();
-      return cardTemplate;
-    } else {
-      const cardTemplate = this._cardContainer.content
-        .querySelector(".element")
-        .cloneNode(true);
-      return cardTemplate;
-    }
+    const cardTemplate = this._cardContainer.content
+      .querySelector(".element")
+      .cloneNode(true);
+    return cardTemplate;
   }
 
   //Проверка - ставил ли я уже лайк на этой карточке
@@ -112,11 +102,18 @@ export default class Card {
   generateNewCard() {
     this._card = this._getTemplate();
     this._card.id = this.cardId;
-    this._basket = this._card.querySelector(".element__basket-button");
     this._card.querySelector(".element__title").textContent = this._title;
     this._сardImage = this._card.querySelector(".element__image");
     this._сardImage.src = this._link;
     this._сardImage.alt = this._title;
+
+    //Скрытие кнопки удаления карточки при необходимости
+    this._basket = this._card.querySelector(".element__basket-button");
+    this._basket.classList.add(
+      this._checkCardId()
+        ? "element__basket-button"
+        : "element__basket-button_hidden"
+    );
 
     this._likeNumber = this._card.querySelector(".element__like-count");
     this._likeNumber.textContent = this._likeCount;

@@ -13,7 +13,6 @@
 @import url(../blocks/popup/__input/_named/popup__input_named_job.css);
 @import url(../blocks/popup/__submit-button/popup__submit-button.css);
 @import url(../blocks/popup/__submit-button/_disabled/popup__submit-button_disabled.css);
-@import url(../blocks/popup/__submit-button/_place/popup__submit-button_place_popup-delete.css);
 @import url(../blocks/popup/__caption/popup__caption.css);
 @import url(../blocks/popup/__image/popup__image.css);
 @import url(../blocks/popup/__image-container/popup__image-container.css);
@@ -38,6 +37,7 @@
 @import url(../blocks/element/element.css);
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__basket-button/element__basket-button.css);
+@import url(../blocks/element/__basket-button/_hidden/element__basket-button_hidden.css);
 @import url(../blocks/element/__caption/element__caption.css);
 @import url(../blocks/element/__title/element__title.css);
 @import url(../blocks/element/__like-button/element__like-button.css);

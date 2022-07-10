@@ -14,10 +14,13 @@ import {
   editButton,
   addButton,
   editImgButton,
+  profileTitleSelector,
+  profileSubtitleSelector,
+  profileAvatarSelector,
   profileForm,
   cardForm,
   imageForm,
-  settings,
+  validationConfig,
 } from "../utils/constants.js";
 
 //Инстанцирование класса API
@@ -29,30 +32,29 @@ const api = new Api({
   },
 });
 
-//РАБОТА С ДАННЫМИ ПРОФИЛЯ
-//Инстанцирование класса работы с данными профиля
-const userInfo = new UserInfo({
-  titleSelector: ".profile__title",
-  subtitleSelector: ".profile__subtitle",
-  profileAvatarSelector: ".profile__avatar",
-});
 
-//Добавление данных профиля на страницу
 
-//В этой переменной хранится мой id
-let myId = null;
-
-//Запрос и добавление данных профиля на страницу
-api
-  .getProfileInfo()
-  .then((result) => {
-    userInfo.setUserInfo(result);
-    myId = result._id;
-    return myId;
+//Отрисовка страницы после получения данных профиля и карточек
+Promise.all([api.getProfileInfo(), api.getInitialCards()])
+  .then(([info, cards]) => {
+    myId = info._id;
+    userInfo.setUserInfo(info);
+    createSection(cards).renderItems();
   })
   .catch((error) => {
     console.log(error);
   });
+
+//В этой переменной хранится мой id
+let myId = null;
+
+//РАБОТА С ДАННЫМИ ПРОФИЛЯ
+//Инстанцирование класса работы с данными профиля
+const userInfo = new UserInfo(
+  profileTitleSelector,
+  profileSubtitleSelector,
+  profileAvatarSelector
+);
 
 //Редактирование данных профиля на сервере
 const profilePopupWithForm = new PopupWithForm({
@@ -125,16 +127,6 @@ function createSection(items) {
   );
   return startCards;
 }
-
-//Запрос и добавление карточек на страницу
-api
-  .getInitialCards()
-  .then((result) => {
-    createSection(result).renderItems();
-  })
-  .catch((error) => {
-    console.log(error);
-  });
 
 //Инстанцирование класса Popup и установка слушателей
 const deleteCardPopup = new PopupWithConfirmation(".popup_named_delete");
@@ -225,9 +217,9 @@ addButton.addEventListener("click", () => {
 
 //ВАЛИДАЦИЯ
 //Включение валидации в попапах
-const profileValidation = new FormValidator(settings, profileForm);
-const cardValidation = new FormValidator(settings, cardForm);
-const changaProfileImgValidation = new FormValidator(settings, imageForm);
+const profileValidation = new FormValidator(validationConfig, profileForm);
+const cardValidation = new FormValidator(validationConfig, cardForm);
+const changaProfileImgValidation = new FormValidator(validationConfig, imageForm);
 profileValidation.enableValidation();
 cardValidation.enableValidation();
 changaProfileImgValidation.enableValidation();
