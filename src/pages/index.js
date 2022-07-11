@@ -189,8 +189,6 @@ function createCard(item) {
 //Попап добавления новых карточек
 const cardPopupWithForm = new PopupWithForm({
   submitForm: (inputValues) => {
-    inputValues["name"] = inputValues["imgname"];
-    delete inputValues["imgname"];
     cardPopupWithForm.isLoading(true, "Создать", "Создание...");
     api
       .addNewCard(inputValues)
